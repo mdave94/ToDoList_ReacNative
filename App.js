@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View ,Button} from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hello World! </Text>
-      <StatusBar style="auto" />
+      <Text style={styles.blueBorder}>Hello World! </Text>
+  
+      <Button title='Button' /> 
     </View>
   );
 }
@@ -17,4 +18,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  blueBorder:{
+    borderWidth:2,
+    borderColor:'blue',
+    margin:16,
+    padding:16
+  }
 });
