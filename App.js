@@ -1,14 +1,9 @@
-import {
-  StyleSheet,
-  View,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import { useState } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  
   const [goals, setGoals] = useState([]);
 
   function addGoalHandler(enteredGoalText) {
@@ -18,14 +13,27 @@ export default function App() {
     ]);
   }
 
+  function deleteGoalhandler(id) {
+    setGoals((currentGoals) => {
+      return currentGoals.filter((goal)=> goal.id !== id);
+    })
+    
+  }
+
   return (
     <View style={styles.appContainer}>
-      <GoalInput  addGoalHandler={addGoalHandler} />
+      <GoalInput addGoalHandler={addGoalHandler} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={goals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} />
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                id = {itemData.item.id}
+                onDeleteItem={deleteGoalhandler}
+              />
+            );
           }}
           alwaysBounceHorizontal={false}
           keyExtractor={(item, index) => {
@@ -47,5 +55,4 @@ const styles = StyleSheet.create({
   goalsContainer: {
     flex: 5,
   },
-
 });

@@ -20,6 +20,7 @@ function GoalInput(props) {
         style={styles.textInput}
         placeholder="Enter your goal here !"
         onChangeText={inputHandler}
+        value={enteredGoalText}
       />
       <Button title="Enter" onPress={addGoalHandler} />
     </View>
