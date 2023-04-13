@@ -5,6 +5,7 @@ import {
   Button,
   Modal,
   Image,
+  Text,
 } from "react-native";
 import { useState } from "react";
 
@@ -32,6 +33,7 @@ function GoalInput(props) {
           onChangeText={inputHandler}
           value={enteredGoalText}
         />
+       {props.error && <Text style={{color:"red"}}>Input field can't be empty</Text> } 
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <Button color="#b180f0"  title="Enter" onPress={addGoalHandler} />
