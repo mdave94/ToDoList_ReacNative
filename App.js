@@ -1,5 +1,5 @@
-import { StyleSheet, View, FlatList, Button } from "react-native";
-import { useState } from "react";
+import { StyleSheet, View, FlatList, Button, Pressable } from "react-native";
+import { useState, useEffect } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 import { StatusBar } from "expo-status-bar";
@@ -7,7 +7,7 @@ import { StatusBar } from "expo-status-bar";
 export default function App() {
   const [goals, setGoals] = useState([]);
   const [modalIsVisible, setModalIsVisible] = useState(false);
-  const[error, setError] = useState(false);
+  const [error, setError] = useState(false);
 
   function startAddGoalHandler() {
     setModalIsVisible(true);
@@ -26,7 +26,7 @@ export default function App() {
     }
   }
 
-  function deleteGoalhandler(id) {
+  function deleteGoalHandler(id) {
     setGoals((currentGoals) => {
       return currentGoals.filter((goal) => goal.id !== id);
     });
@@ -60,7 +60,7 @@ export default function App() {
                 <GoalItem
                   text={itemData.item.text}
                   id={itemData.item.id}
-                  onDeleteItem={deleteGoalhandler}
+                  onDeleteItem={deleteGoalHandler}
                 />
               );
             }}

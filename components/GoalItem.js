@@ -1,13 +1,26 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
+import { useState } from "react";
 
 function GoalItem(props) {
+  const [isPressed, setIsPressed] = useState(false);
+
+  const onLongPressDelete = () => {
+    setIsPressed(true);
+    setTimeout(() => {
+      setIsPressed(false);
+      props.onDeleteItem(props.id);
+    }, 500);
+  };
+
   return (
     <View style={styles.goalItem}>
       <Pressable
         android_ripple={{ color: "#dddddd" }}
-        onPress={props.onDeleteItem.bind(this, props.id)}
-        style={({pressed})=>pressed && styles.pressedItem}
-
+        onLongPress={onLongPressDelete}
+        onPressOut={() => setIsPressed(false)}
+        style={({ pressed }) =>
+          pressed || isPressed ? styles.pressedItem : null
+        }
       >
         <Text style={styles.goalText}>{props.text}</Text>
       </Pressable>
@@ -28,7 +41,7 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 8,
   },
-  pressedItem:{
-    opacity:0.5,
-  }
+  pressedItem: {
+    opacity: 0.5,
+  },
 });
