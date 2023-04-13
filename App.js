@@ -18,6 +18,7 @@ export default function App() {
       ...currentGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
+    setModalIsVisible(false)
   }
 
   function deleteGoalhandler(id) {
@@ -27,10 +28,14 @@ export default function App() {
     
   }
 
+  function endAddGoalhendler(){
+    setModalIsVisible(false)
+  }
+
   return (
     <View style={styles.appContainer}>
       <Button title="Add Goal" color="blue" onPress={startAddGoalHandler}/>
-      <GoalInput isVisible={modalIsVisible} addGoalHandler={addGoalHandler} />
+      <GoalInput close={endAddGoalhendler} isVisible={modalIsVisible} addGoalHandler={addGoalHandler} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={goals}
